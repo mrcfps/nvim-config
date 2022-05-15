@@ -6,7 +6,6 @@ set smarttab
 set softtabstop=4
 set mouse=a
 set termguicolors
-set autochdir
 set encoding=UTF-8
 set nrformats=
 
@@ -33,12 +32,11 @@ set updatetime=300
 
 " Global variables.
 language en_US.utf-8
-let g:mapleader = ','
+let g:mapleader = ' '
 let g:python3_host_prog = '/usr/local/bin/python3'
 
 call plug#begin()
 
-Plug 'tc50cal/vim-terminal'
 Plug 'ethanholz/nvim-lastplace'
 Plug 'gelguy/wilder.nvim'
 Plug 'akinsho/bufferline.nvim'
@@ -47,6 +45,8 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'preservim/nerdtree'
 Plug 'preservim/tagbar'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-entire'
@@ -106,6 +106,8 @@ nmap <silent> gr <Plug>(coc-references)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
 function! s:show_documentation()
   if CocAction('hasProvider', 'hover')
     call CocActionAsync('doHover')
@@ -117,7 +119,6 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-" Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
 " Formatting selected code.
@@ -135,6 +136,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
+
+nnoremap <leader>t :sp \| terminal<cr>
 
 lua << EOF
 require("bufferline").setup{}
