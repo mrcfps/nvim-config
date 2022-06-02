@@ -1,6 +1,6 @@
 vim.cmd [[
 try
-  colorscheme jellybeans
+  colorscheme ayu
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark

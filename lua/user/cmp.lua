@@ -54,7 +54,7 @@ cmp.setup {
   mapping = {
     ["<C-p>"] = cmp.mapping.select_prev_item(),
     ["<Up>"] = cmp.mapping.select_prev_item(),
-		["<C-n>"] = cmp.mapping.select_next_item(),
+    ["<C-n>"] = cmp.mapping.select_next_item(),
     ["<Down>"] = cmp.mapping.select_next_item(),
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
@@ -69,13 +69,13 @@ cmp.setup {
     -- ["<Tab>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
-        cmp.confirm({ select = true })
-      -- elseif luasnip.expandable() then
-      --   luasnip.expand()
-      -- elseif luasnip.expand_or_jumpable() then
-      --   luasnip.expand_or_jump()
-      -- elseif check_backspace() then
-      --   fallback()
+        cmp.confirm { select = true }
+        -- elseif luasnip.expandable() then
+        --   luasnip.expand()
+        -- elseif luasnip.expand_or_jumpable() then
+        --   luasnip.expand_or_jump()
+        -- elseif check_backspace() then
+        --   fallback()
       else
         fallback()
       end
