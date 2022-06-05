@@ -46,6 +46,7 @@ return packer.startup(function(use)
   use "numToStr/Comment.nvim" -- Easily comment stuff
   use "ethanholz/nvim-lastplace"
   use "gelguy/wilder.nvim" -- Auto completion for ex commands
+  use "editorconfig/editorconfig-vim"
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
   use "akinsho/bufferline.nvim"

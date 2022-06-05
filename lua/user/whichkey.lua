@@ -52,7 +52,6 @@ local setup = {
   hidden = { "<silent>", "<cmd>", "<Cmd>", "<CR>", "call", "lua", "^:", "^ " }, -- hide mapping boilerplate
   show_help = true, -- show help message on the command line when the popup is visible
   triggers = "auto", -- automatically setup triggers
-  -- triggers = {"<leader>"} -- or specify a list manually
   triggers_blacklist = {
     -- list of mode / prefixes that should never be hooked by WhichKey
     -- this is mostly relevant for key maps that start with a native binding
@@ -162,6 +161,15 @@ local mappings = {
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
+  },
+
+  x = {
+    name = "Trouble",
+    x = { "<cmd>TroubleToggle<cr>", "Toggle trouble" },
+    w = { "<cmd>TroubleToggle workspace_diagnostics<cr>", "Open workspace diagnostics" },
+    d = { "<cmd>TroubleToggle document_diagnostics<cr>", "Open document diagnostics" },
+    q = { "<cmd>TroubleToggle quickfix<cr>", "Open quickfix" },
+    l = { "<cmd>TroubleToggle loclist<cr>", "Open loclist" },
   },
 
   t = {
