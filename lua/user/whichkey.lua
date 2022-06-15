@@ -183,6 +183,19 @@ local mappings = {
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<cr>", "Horizontal" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<cr>", "Vertical" },
   },
+
+  u = {
+    name = "Ultest",
+    a = { "<cmd>UltestAttach<cr>", "Attach to the process" },
+    c = { "<cmd>UltestClear<cr>", "Clear test results" },
+    l = { "<cmd>UltestLast<cr>", "Run last test" },
+    n = { "<cmd>UltestNearest<cr>", "Run nearest test" },
+    o = { "<cmd>UltestOutput<cr>", "Show the output of the nearest test" },
+    u = { "<cmd>Ultest<cr>", "Run all tests in the current file" },
+    s = { "<cmd>UltestSummary<cr>", "Toggle the test summary window" },
+    S = { "<cmd>UltestStop<cr>", "Stop all running tests" },
+    N = { "<cmd>UltestStopNearest<cr>", "Stop nearest running test" },
+  },
 }
 
 which_key.setup(setup)
