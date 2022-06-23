@@ -175,6 +175,7 @@ local mappings = {
 
   t = {
     name = "Terminal",
+    l = { "<cmd>lua _LAZYGIT_TOGGLE()<cr>", "LazyGit" },
     n = { "<cmd>lua _NODE_TOGGLE()<cr>", "Node" },
     u = { "<cmd>lua _NCDU_TOGGLE()<cr>", "NCDU" },
     t = { "<cmd>lua _HTOP_TOGGLE()<cr>", "Htop" },
