@@ -66,6 +66,8 @@ return packer.startup(function(use)
   use "rafi/awesome-vim-colorschemes"
   use "lunarvim/darkplus.nvim"
 
+  use "ray-x/go.nvim"
+
   -- cmp plugins
   use "hrsh7th/nvim-cmp" -- The completion plugin
   use "hrsh7th/cmp-buffer" -- buffer completions
@@ -110,7 +112,14 @@ return packer.startup(function(use)
 
   -- Test
   use "vim-test/vim-test"
-  use { "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" }
+  use {
+    "nvim-neotest/neotest",
+    requires = {
+      "nvim-lua/plenary.nvim",
+      "nvim-treesitter/nvim-treesitter",
+      "antoinemadec/FixCursorHold.nvim",
+    },
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

@@ -144,6 +144,11 @@ _G.packer_plugins = {
     path = "/Users/admin/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
   },
+  ["go.nvim"] = {
+    loaded = true,
+    path = "/Users/admin/.local/share/nvim/site/pack/packer/start/go.nvim",
+    url = "https://github.com/ray-x/go.nvim"
+  },
   ["impatient.nvim"] = {
     loaded = true,
     path = "/Users/admin/.local/share/nvim/site/pack/packer/start/impatient.nvim",
@@ -168,6 +173,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/admin/.local/share/nvim/site/pack/packer/start/neoscroll.nvim",
     url = "https://github.com/karb94/neoscroll.nvim"
+  },
+  neotest = {
+    loaded = true,
+    path = "/Users/admin/.local/share/nvim/site/pack/packer/start/neotest",
+    url = "https://github.com/nvim-neotest/neotest"
   },
   ["nlsp-settings.nvim"] = {
     loaded = true,
@@ -283,11 +293,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/admin/.local/share/nvim/site/pack/packer/start/vim-test",
     url = "https://github.com/vim-test/vim-test"
-  },
-  ["vim-ultest"] = {
-    loaded = true,
-    path = "/Users/admin/.local/share/nvim/site/pack/packer/start/vim-ultest",
-    url = "https://github.com/rcarriga/vim-ultest"
   },
   ["which-key.nvim"] = {
     loaded = true,

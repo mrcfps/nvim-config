@@ -162,6 +162,7 @@ local mappings = {
     R = { "<cmd>Telescope registers<cr>", "Registers" },
     k = { "<cmd>Telescope keymaps<cr>", "Keymaps" },
     C = { "<cmd>Telescope commands<cr>", "Commands" },
+    s = { "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", "Symbols" },
   },
 
   x = {
@@ -186,16 +187,13 @@ local mappings = {
   },
 
   u = {
-    name = "Ultest",
-    a = { "<cmd>UltestAttach<cr>", "Attach to the process" },
-    c = { "<cmd>UltestClear<cr>", "Clear test results" },
-    l = { "<cmd>UltestLast<cr>", "Run last test" },
-    n = { "<cmd>UltestNearest<cr>", "Run nearest test" },
-    o = { "<cmd>UltestOutput<cr>", "Show the output of the nearest test" },
-    u = { "<cmd>Ultest<cr>", "Run all tests in the current file" },
-    s = { "<cmd>UltestSummary<cr>", "Toggle the test summary window" },
-    S = { "<cmd>UltestStop<cr>", "Stop all running tests" },
-    N = { "<cmd>UltestStopNearest<cr>", "Stop nearest running test" },
+    name = "Test",
+    a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach to the process" },
+    n = { "<cmd>lua require('neotest').run.run()<cr>", "Run nearest test" },
+    o = { "<cmd>neotest.output<cr>", "Show the output of the nearest test" },
+    u = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run all tests in the current file" },
+    s = { "<cmd>neotest.summary<cr>", "Toggle the test summary window" },
+    S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop running test" },
   },
 }
 
