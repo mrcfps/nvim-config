@@ -64,6 +64,7 @@ return packer.startup(function(use)
 
   -- Colorschemes
   use "rafi/awesome-vim-colorschemes"
+  use "folke/tokyonight.nvim"
   use "lunarvim/darkplus.nvim"
 
   use "ray-x/go.nvim"
