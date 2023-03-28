@@ -47,8 +47,8 @@ return packer.startup(function(use)
   use "ethanholz/nvim-lastplace"
   use "gelguy/wilder.nvim" -- Auto completion for ex commands
   use "editorconfig/editorconfig-vim"
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
+  use "nvim-tree/nvim-web-devicons"
+  use "nvim-tree/nvim-tree.lua"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use "tpope/vim-surround"
@@ -108,7 +108,7 @@ return packer.startup(function(use)
   -- Diagnostics, references, telescope results, quickfix and location lists
   use {
     "folke/trouble.nvim",
-    requires = "kyazdani42/nvim-web-devicons",
+    requires = "nvim-tree/nvim-web-devicons",
   }
 
   -- Test
@@ -117,9 +117,29 @@ return packer.startup(function(use)
     "nvim-neotest/neotest",
     requires = {
       "nvim-lua/plenary.nvim",
+      "nvim-neotest/neotest-go",
       "nvim-treesitter/nvim-treesitter",
       "antoinemadec/FixCursorHold.nvim",
     },
+    config = function()
+      -- get neotest namespace (api call creates or returns namespace)
+      local neotest_ns = vim.api.nvim_create_namespace("neotest")
+      vim.diagnostic.config({
+        virtual_text = {
+          format = function(diagnostic)
+            local message =
+              diagnostic.message:gsub("\n", " "):gsub("\t", " "):gsub("%s+", " "):gsub("^%s+", "")
+            return message
+          end,
+        },
+      }, neotest_ns)
+      require("neotest").setup({
+        -- your neotest config here
+        adapters = {
+          require("neotest-go"),
+        },
+      })
+    end,
   }
 
   -- Automatically set up your configuration after cloning packer.nvim

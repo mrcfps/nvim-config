@@ -190,9 +190,9 @@ local mappings = {
     name = "Test",
     a = { "<cmd>lua require('neotest').run.attach()<cr>", "Attach to the process" },
     n = { "<cmd>lua require('neotest').run.run()<cr>", "Run nearest test" },
-    o = { "<cmd>neotest.output<cr>", "Show the output of the nearest test" },
+    o = { "<cmd>lua require('neotest').output_panel.toggle()<cr>", "Show the output of the nearest test" },
     u = { "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", "Run all tests in the current file" },
-    s = { "<cmd>neotest.summary<cr>", "Toggle the test summary window" },
+    s = { "<cmd>lua require('neotest').summary.toggle()<cr>", "Toggle the test summary window" },
     S = { "<cmd>lua require('neotest').run.stop()<cr>", "Stop running test" },
   },
 }

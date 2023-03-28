@@ -6,7 +6,7 @@ end
 local lspconfig = require "lspconfig"
 local handler = require "user.lsp.handlers"
 
-local servers = { "jsonls", "sumneko_lua", "gopls", "bashls", "rust_analyzer" }
+local servers = { "jsonls", "lua_ls", "gopls", "bashls", "rust_analyzer" }
 
 lsp_installer.setup {
   ensure_installed = servers,
