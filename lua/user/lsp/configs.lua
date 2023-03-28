@@ -4,8 +4,9 @@ if not status_ok then
 end
 
 local lspconfig = require "lspconfig"
+local handler = require "user.lsp.handlers"
 
-local servers = { "jsonls", "sumneko_lua", "gopls", "bashls" }
+local servers = { "jsonls", "sumneko_lua", "gopls", "bashls", "rust_analyzer" }
 
 lsp_installer.setup {
   ensure_installed = servers,
@@ -13,8 +14,9 @@ lsp_installer.setup {
 
 for _, server in pairs(servers) do
   local opts = {
-    on_attach = require("user.lsp.handlers").on_attach,
-    capabilities = require("user.lsp.handlers").capabilities,
+    on_attach = handler.on_attach,
+    capabilities = handler.capabilities,
+    flag = handler.flag,
   }
   local has_custom_opts, server_custom_opts = pcall(require, "user.lsp.settings." .. server)
   if has_custom_opts then

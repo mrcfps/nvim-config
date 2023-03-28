@@ -1,6 +1,6 @@
 vim.cmd [[
 try
-  colorscheme tokyonight
+  colorscheme dogrun
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
