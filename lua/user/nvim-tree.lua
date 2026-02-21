@@ -3,19 +3,11 @@ if not status_ok then
   return
 end
 
-local config_status_ok, nvim_tree_config = pcall(require, "nvim-tree.config")
-if not config_status_ok then
-  return
-end
-
-local tree_cb = nvim_tree_config.nvim_tree_callback
-
 nvim_tree.setup {
   disable_netrw = true,
   hijack_netrw = true,
-  open_on_tab = false,
   hijack_cursor = false,
-  update_cwd = true,
+  sync_root_with_cwd = true,
   hijack_directories = {
     enable = true,
     auto_open = true,
@@ -31,11 +23,13 @@ nvim_tree.setup {
   },
   update_focused_file = {
     enable = true,
-    update_cwd = true,
-    ignore_list = {},
+    update_root = {
+      enable = true,
+      ignore_list = {},
+    },
   },
   system_open = {
-    cmd = nil,
+    cmd = "",
     args = {},
   },
   filters = {
@@ -44,21 +38,11 @@ nvim_tree.setup {
   },
   git = {
     enable = true,
-    ignore = true,
     timeout = 500,
   },
   view = {
     width = 30,
-    hide_root_folder = false,
     side = "left",
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-        { key = "h", cb = tree_cb "close_node" },
-        { key = "v", cb = tree_cb "vsplit" },
-      },
-    },
     number = false,
     relativenumber = false,
   },
@@ -68,19 +52,34 @@ nvim_tree.setup {
     },
   },
   renderer = {
-    highlight_git = true,
+    highlight_git = "name",
+    root_folder_label = false,
     indent_markers = {
       enable = true,
       icons = {
-        corner = "└ ",
-        edge = "│ ",
-        none = "  ",
+        corner = "└",
+        edge = "│",
+        item = "│",
+        bottom = "─",
+        none = " ",
       },
     },
     icons = {
-      webdev_colors = true,
+      web_devicons = {
+        file = {
+          enable = true,
+          color = true,
+        },
+        folder = {
+          enable = false,
+          color = true,
+        },
+      },
       git_placement = "before",
-      padding = " ",
+      padding = {
+        icon = " ",
+        folder_arrow = " ",
+      },
       symlink_arrow = " ➛ ",
       show = {
         file = true,
