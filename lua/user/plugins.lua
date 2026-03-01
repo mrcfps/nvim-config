@@ -34,6 +34,7 @@ require("lazy").setup({
   "goolord/alpha-nvim",
   "antoinemadec/FixCursorHold.nvim",
   "folke/which-key.nvim",
+  "echasnovski/mini.icons",
 
   "rafi/awesome-vim-colorschemes",
   "ayu-theme/ayu-vim",
