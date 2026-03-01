@@ -60,7 +60,6 @@ which_key.add {
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
     { "<leader>w", "<cmd>w!<CR>", desc = "Save" },
     { "<leader>c", "<cmd>Bdelete!<CR>", desc = "Close Buffer" },
-    { "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
     {
       "<leader>f",
       function()
