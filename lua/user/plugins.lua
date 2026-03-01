@@ -40,6 +40,7 @@ require("lazy").setup({
 
   "rafi/awesome-vim-colorschemes",
   "ayu-theme/ayu-vim",
+  "catppuccin/nvim",
   "folke/tokyonight.nvim",
   "lunarvim/darkplus.nvim",
 
