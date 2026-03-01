@@ -2,7 +2,7 @@ local handler = require "user.lsp.handlers"
 local has_mason, mason = pcall(require, "mason")
 local has_mason_lspconfig, mason_lspconfig = pcall(require, "mason-lspconfig")
 
-local servers = { "jsonls", "lua_ls", "gopls", "bashls", "rust_analyzer" }
+local servers = { "jsonls", "lua_ls", "bashls", "rust_analyzer", "ts_ls" }
 
 if has_mason then
   mason.setup()

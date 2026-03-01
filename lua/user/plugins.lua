@@ -36,6 +36,7 @@ require("lazy").setup({
   "folke/which-key.nvim",
 
   "rafi/awesome-vim-colorschemes",
+  "ayu-theme/ayu-vim",
   "folke/tokyonight.nvim",
   "lunarvim/darkplus.nvim",
 
