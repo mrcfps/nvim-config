@@ -50,7 +50,11 @@ which_key.add {
     { "<leader>a", "<cmd>Alpha<cr>", desc = "Alpha" },
     {
       "<leader>b",
-      "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      function()
+        local builtin = require "telescope.builtin"
+        local themes = require "telescope.themes"
+        builtin.buffers(themes.get_dropdown { previewer = false })
+      end,
       desc = "Buffers",
     },
     { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
@@ -59,12 +63,22 @@ which_key.add {
     { "<leader>h", "<cmd>nohlsearch<CR>", desc = "No Highlight" },
     {
       "<leader>f",
-      "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<cr>",
+      function()
+        local builtin = require "telescope.builtin"
+        local themes = require "telescope.themes"
+        builtin.find_files(themes.get_dropdown { previewer = false })
+      end,
       desc = "Find files",
     },
     { "<leader>o", "<cmd>SymbolsOutline<cr>", desc = "Outline" },
     { "<leader>F", "<cmd>Telescope live_grep theme=ivy<cr>", desc = "Find Text" },
-    { "<leader>P", "<cmd>lua require('telescope').extensions.projects.projects()<cr>", desc = "Projects" },
+    {
+      "<leader>P",
+      function()
+        require("telescope").extensions.projects.projects()
+      end,
+      desc = "Projects",
+    },
 
     { "<leader>p", group = "Plugins" },
     { "<leader>pc", "<cmd>Lazy clean<cr>", desc = "Clean" },
@@ -74,32 +88,98 @@ which_key.add {
     { "<leader>pu", "<cmd>Lazy update<cr>", desc = "Update" },
 
     { "<leader>g", group = "Git" },
-    { "<leader>gg", "<cmd>lua _LAZYGIT_TOGGLE()<CR>", desc = "Lazygit" },
-    { "<leader>gj", "<cmd>lua require 'gitsigns'.next_hunk()<cr>", desc = "Next Hunk" },
-    { "<leader>gk", "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", desc = "Prev Hunk" },
-    { "<leader>gl", "<cmd>lua require 'gitsigns'.blame_line()<cr>", desc = "Blame" },
-    { "<leader>gp", "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", desc = "Preview Hunk" },
-    { "<leader>gr", "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", desc = "Reset Hunk" },
-    { "<leader>gR", "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", desc = "Reset Buffer" },
-    { "<leader>gs", "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", desc = "Stage Hunk" },
-    { "<leader>gu", "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>", desc = "Undo Stage Hunk" },
+    { "<leader>gg", _LAZYGIT_TOGGLE, desc = "Lazygit" },
+    {
+      "<leader>gj",
+      function()
+        require("gitsigns").next_hunk()
+      end,
+      desc = "Next Hunk",
+    },
+    {
+      "<leader>gk",
+      function()
+        require("gitsigns").prev_hunk()
+      end,
+      desc = "Prev Hunk",
+    },
+    {
+      "<leader>gl",
+      function()
+        require("gitsigns").blame_line()
+      end,
+      desc = "Blame",
+    },
+    {
+      "<leader>gp",
+      function()
+        require("gitsigns").preview_hunk()
+      end,
+      desc = "Preview Hunk",
+    },
+    {
+      "<leader>gr",
+      function()
+        require("gitsigns").reset_hunk()
+      end,
+      desc = "Reset Hunk",
+    },
+    {
+      "<leader>gR",
+      function()
+        require("gitsigns").reset_buffer()
+      end,
+      desc = "Reset Buffer",
+    },
+    {
+      "<leader>gs",
+      function()
+        require("gitsigns").stage_hunk()
+      end,
+      desc = "Stage Hunk",
+    },
+    {
+      "<leader>gu",
+      function()
+        require("gitsigns").undo_stage_hunk()
+      end,
+      desc = "Undo Stage Hunk",
+    },
     { "<leader>go", "<cmd>Telescope git_status<cr>", desc = "Open changed file" },
     { "<leader>gb", "<cmd>Telescope git_branches<cr>", desc = "Checkout branch" },
     { "<leader>gc", "<cmd>Telescope git_commits<cr>", desc = "Checkout commit" },
     { "<leader>gd", "<cmd>Gitsigns diffthis HEAD<cr>", desc = "Diff" },
 
     { "<leader>l", group = "LSP" },
-    { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "Code Action" },
+    { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
     { "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
     { "<leader>lw", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
-    { "<leader>lf", "<cmd>lua vim.lsp.buf.format({ async = true })<cr>", desc = "Format" },
+    {
+      "<leader>lf",
+      function()
+        vim.lsp.buf.format { async = true }
+      end,
+      desc = "Format",
+    },
     { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
     { "<leader>lI", "<cmd>Mason<cr>", desc = "Installer Info" },
-    { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next Diagnostic" },
-    { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev()<cr>", desc = "Prev Diagnostic" },
-    { "<leader>ll", "<cmd>lua vim.lsp.codelens.run()<cr>", desc = "CodeLens Action" },
-    { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<cr>", desc = "Quickfix" },
-    { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename" },
+    {
+      "<leader>lj",
+      function()
+        vim.diagnostic.jump { count = 1 }
+      end,
+      desc = "Next Diagnostic",
+    },
+    {
+      "<leader>lk",
+      function()
+        vim.diagnostic.jump { count = -1 }
+      end,
+      desc = "Prev Diagnostic",
+    },
+    { "<leader>ll", vim.lsp.codelens.run, desc = "CodeLens Action" },
+    { "<leader>lq", vim.diagnostic.setloclist, desc = "Quickfix" },
+    { "<leader>lr", vim.lsp.buf.rename, desc = "Rename" },
     { "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document Symbols" },
     { "<leader>lS", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Workspace Symbols" },
 
@@ -115,28 +195,64 @@ which_key.add {
     { "<leader>ss", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", desc = "Symbols" },
 
     { "<leader>x", group = "Trouble" },
-    { "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle trouble" },
-    { "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Open workspace diagnostics" },
-    { "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Open document diagnostics" },
-    { "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Open quickfix" },
-    { "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Open loclist" },
+    { "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", desc = "Toggle trouble" },
+    { "<leader>xw", "<cmd>Trouble diagnostics toggle<cr>", desc = "Open workspace diagnostics" },
+    { "<leader>xd", "<cmd>Trouble diagnostics toggle focus=true filter.buf=0<cr>", desc = "Open document diagnostics" },
+    { "<leader>xq", "<cmd>Trouble qflist toggle<cr>", desc = "Open quickfix" },
+    { "<leader>xl", "<cmd>Trouble loclist toggle<cr>", desc = "Open loclist" },
 
     { "<leader>t", group = "Terminal" },
-    { "<leader>tl", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", desc = "LazyGit" },
-    { "<leader>tn", "<cmd>lua _NODE_TOGGLE()<cr>", desc = "Node" },
-    { "<leader>tu", "<cmd>lua _NCDU_TOGGLE()<cr>", desc = "NCDU" },
-    { "<leader>tt", "<cmd>lua _HTOP_TOGGLE()<cr>", desc = "Htop" },
-    { "<leader>tp", "<cmd>lua _PYTHON_TOGGLE()<cr>", desc = "Python" },
+    { "<leader>tl", _LAZYGIT_TOGGLE, desc = "LazyGit" },
+    { "<leader>tn", _NODE_TOGGLE, desc = "Node" },
+    { "<leader>tu", _NCDU_TOGGLE, desc = "NCDU" },
+    { "<leader>tt", _HTOP_TOGGLE, desc = "Htop" },
+    { "<leader>tp", _PYTHON_TOGGLE, desc = "Python" },
     { "<leader>tf", "<cmd>ToggleTerm direction=float<cr>", desc = "Float" },
     { "<leader>th", "<cmd>ToggleTerm direction=horizontal<cr>", desc = "Horizontal" },
     { "<leader>tv", "<cmd>ToggleTerm direction=vertical<cr>", desc = "Vertical" },
 
     { "<leader>u", group = "Test" },
-    { "<leader>ua", "<cmd>lua require('neotest').run.attach()<cr>", desc = "Attach to the process" },
-    { "<leader>un", "<cmd>lua require('neotest').run.run()<cr>", desc = "Run nearest test" },
-    { "<leader>uo", "<cmd>lua require('neotest').output_panel.toggle()<cr>", desc = "Show the output of the nearest test" },
-    { "<leader>uu", "<cmd>lua require('neotest').run.run(vim.fn.expand('%'))<cr>", desc = "Run all tests in the current file" },
-    { "<leader>us", "<cmd>lua require('neotest').summary.toggle()<cr>", desc = "Toggle the test summary window" },
-    { "<leader>uS", "<cmd>lua require('neotest').run.stop()<cr>", desc = "Stop running test" },
+    {
+      "<leader>ua",
+      function()
+        require("neotest").run.attach()
+      end,
+      desc = "Attach to the process",
+    },
+    {
+      "<leader>un",
+      function()
+        require("neotest").run.run()
+      end,
+      desc = "Run nearest test",
+    },
+    {
+      "<leader>uo",
+      function()
+        require("neotest").output_panel.toggle()
+      end,
+      desc = "Show the output of the nearest test",
+    },
+    {
+      "<leader>uu",
+      function()
+        require("neotest").run.run(vim.fn.expand "%")
+      end,
+      desc = "Run all tests in the current file",
+    },
+    {
+      "<leader>us",
+      function()
+        require("neotest").summary.toggle()
+      end,
+      desc = "Toggle the test summary window",
+    },
+    {
+      "<leader>uS",
+      function()
+        require("neotest").run.stop()
+      end,
+      desc = "Stop running test",
+    },
   },
 }
