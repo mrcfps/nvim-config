@@ -77,6 +77,18 @@ require("lazy").setup({
   "lewis6991/gitsigns.nvim",
 
   {
+    "jakewvincent/mkdnflow.nvim",
+    ft = { "markdown", "rmd" },
+    config = function()
+      require("mkdnflow").setup({
+        mappings = {
+          MkdnFollowLink = { "n", "gd" },
+        },
+      })
+    end,
+  },
+
+  {
     "folke/trouble.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
