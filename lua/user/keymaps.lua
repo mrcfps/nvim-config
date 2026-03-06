@@ -48,6 +48,22 @@ keymap("n", "<A-k>", "<Esc>:m .-2<CR>==gi", opts)
 -- Press jk fast to enter
 keymap("i", "jk", "<ESC>", opts)
 
+-- Leader fallbacks (works even if leader resolution drifts)
+keymap("n", "<Space>f", function()
+  local has_builtin, builtin = pcall(require, "telescope.builtin")
+  if not has_builtin then
+    return
+  end
+
+  local has_themes, themes = pcall(require, "telescope.themes")
+  if has_themes then
+    builtin.find_files(themes.get_dropdown { previewer = false })
+    return
+  end
+
+  builtin.find_files()
+end, opts)
+
 -- Visual --
 -- Stay in indent mode
 keymap("v", "<", "<gv", opts)

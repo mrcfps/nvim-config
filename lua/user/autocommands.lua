@@ -50,9 +50,33 @@ local markdown_group = api.nvim_create_augroup("_markdown", { clear = true })
 api.nvim_create_autocmd("FileType", {
   group = markdown_group,
   pattern = "markdown",
-  callback = function()
+  callback = function(args)
     vim.opt_local.wrap = true
     vim.opt_local.spell = true
+
+    vim.schedule(function()
+      if not vim.api.nvim_buf_is_valid(args.buf) then
+        return
+      end
+
+      pcall(vim.keymap.del, "n", "<leader>f", { buffer = args.buf })
+      pcall(vim.keymap.del, "n", "<Space>f", { buffer = args.buf })
+
+      vim.keymap.set("n", "<Space>f", function()
+        local has_builtin, builtin = pcall(require, "telescope.builtin")
+        if not has_builtin then
+          return
+        end
+
+        local has_themes, themes = pcall(require, "telescope.themes")
+        if has_themes then
+          builtin.find_files(themes.get_dropdown { previewer = false })
+          return
+        end
+
+        builtin.find_files()
+      end, { buffer = args.buf, silent = true, noremap = true, nowait = true, desc = "Find files" })
+    end)
   end,
 })
 

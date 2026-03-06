@@ -36,6 +36,8 @@ local options = {
   sidescrolloff = 8,
   guifont = "monospace:h17", -- the font used in graphical neovim applications
   autoread = true, -- auto refresh buffer
+  foldenable = false, -- disable code folding globally
+  foldmethod = "manual", -- avoid fold creation from expr/indent methods
 }
 
 vim.opt.shortmess:append "c"
@@ -47,3 +49,22 @@ end
 vim.cmd "set whichwrap+=<,>,[,],h,l"
 vim.cmd [[set iskeyword+=-]]
 vim.cmd [[set formatoptions-=cro]] -- TODO: this doesn't seem to work
+
+if not vim.g._paste_ee21_guard then
+  local default_paste = vim.paste
+
+  vim.paste = function(lines, phase)
+    local ok, result = pcall(default_paste, lines, phase)
+    if ok then
+      return result
+    end
+
+    if tostring(result):find("Vim:EE21", 1, true) then
+      return true
+    end
+
+    error(result)
+  end
+
+  vim.g._paste_ee21_guard = true
+end
