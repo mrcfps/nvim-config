@@ -34,7 +34,16 @@ nvim_tree.setup {
   },
   filters = {
     dotfiles = false,
-    custom = {},
+    git_ignored = false,
+    custom = {
+      "^node_modules$",
+      "^%.[^e].*",
+      "^%.e$",
+      "^%.e[^n].*",
+      "^%.en$",
+      "^%.en[^v].*",
+      "^%.env[^.].*",
+    },
   },
   git = {
     enable = true,
@@ -116,7 +125,6 @@ nvim_tree.setup {
 }
 
 local function open_nvim_tree(data)
-
   -- buffer is a directory
   local directory = vim.fn.isdirectory(data.file) == 1
 
