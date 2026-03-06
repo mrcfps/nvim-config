@@ -92,6 +92,11 @@ telescope.setup {
         "(^|/)([^./][^/]*|\\.env(\\..*)?)$",
       },
     },
+    live_grep = {
+      additional_args = function()
+        return { "--smart-case" }
+      end,
+    },
   },
   extensions = {
     -- Your extension configuration goes here:
