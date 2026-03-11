@@ -34,6 +34,11 @@ local options = {
   wrap = false, -- display lines as one long line
   scrolloff = 8, -- is one of my fav
   sidescrolloff = 8,
+  listchars = {
+    tab = "│ ",
+    trail = "·",
+    nbsp = "␣",
+  },
   guifont = "monospace:h17", -- the font used in graphical neovim applications
   autoread = true, -- auto refresh buffer
   foldenable = false, -- disable code folding globally

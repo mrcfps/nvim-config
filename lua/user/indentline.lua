@@ -8,6 +8,7 @@ vim.opt.list = true
 ibl.setup({
   indent = {
     char = "▏",
+    tab_char = "│",
   },
   exclude = {
     buftypes = { "terminal", "nofile" },
