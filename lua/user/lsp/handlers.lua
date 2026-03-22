@@ -50,9 +50,6 @@ local function lsp_keymaps(bufnr)
   vim.keymap.set("n", "]d", function()
     vim.diagnostic.jump({ count = 1 })
   end, opts)
-  vim.api.nvim_buf_create_user_command(bufnr, "Format", function()
-    vim.lsp.buf.format({ async = true })
-  end, {})
 end
 
 M.on_attach = function(client, bufnr)

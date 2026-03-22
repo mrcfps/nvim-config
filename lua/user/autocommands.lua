@@ -1,4 +1,5 @@
 local api = vim.api
+local telescope = require "user.telescope_helpers"
 
 local general_group = api.nvim_create_augroup("_general_settings", { clear = true })
 api.nvim_create_autocmd("FileType", {
@@ -61,21 +62,24 @@ api.nvim_create_autocmd("FileType", {
 
       pcall(vim.keymap.del, "n", "<leader>f", { buffer = args.buf })
       pcall(vim.keymap.del, "n", "<Space>f", { buffer = args.buf })
+      pcall(vim.keymap.del, "n", "<leader>F", { buffer = args.buf })
+      pcall(vim.keymap.del, "n", "<Space>F", { buffer = args.buf })
 
-      vim.keymap.set("n", "<Space>f", function()
-        local has_builtin, builtin = pcall(require, "telescope.builtin")
-        if not has_builtin then
-          return
-        end
+      vim.keymap.set("n", "<Space>f", telescope.find_files, {
+        buffer = args.buf,
+        silent = true,
+        noremap = true,
+        nowait = true,
+        desc = "Find files",
+      })
 
-        local has_themes, themes = pcall(require, "telescope.themes")
-        if has_themes then
-          builtin.find_files(themes.get_dropdown { previewer = false })
-          return
-        end
-
-        builtin.find_files()
-      end, { buffer = args.buf, silent = true, noremap = true, nowait = true, desc = "Find files" })
+      vim.keymap.set("n", "<Space>F", telescope.live_grep, {
+        buffer = args.buf,
+        silent = true,
+        noremap = true,
+        nowait = true,
+        desc = "Find Text",
+      })
     end)
   end,
 })
@@ -111,12 +115,3 @@ api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "<CR>", "<CR><cmd>cclose<CR>", { buffer = args.buf, silent = true })
   end,
 })
-
--- Autoformat
--- local lsp_group = api.nvim_create_augroup("_lsp", { clear = true })
--- api.nvim_create_autocmd("BufWritePre", {
---   group = lsp_group,
---   callback = function()
---     vim.lsp.buf.format({ async = false })
---   end,
--- })

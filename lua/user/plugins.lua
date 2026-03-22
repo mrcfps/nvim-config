@@ -60,7 +60,6 @@ require("lazy").setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
   "tamago324/nlsp-settings.nvim",
-  "nvimtools/none-ls.nvim",
   "ray-x/lsp_signature.nvim",
 
   "simrat39/symbols-outline.nvim",

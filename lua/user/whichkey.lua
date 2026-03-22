@@ -40,15 +40,13 @@ which_key.setup {
   },
 }
 
+local telescope = require "user.telescope_helpers"
+
 local mappings = {
   { "<leader>a", "<cmd>Alpha<cr>", desc = "Alpha" },
   {
     "<leader>b",
-    function()
-      local builtin = require "telescope.builtin"
-      local themes = require "telescope.themes"
-      builtin.buffers(themes.get_dropdown { previewer = false })
-    end,
+    telescope.buffers,
     desc = "Buffers",
   },
   { "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
@@ -56,15 +54,11 @@ local mappings = {
   { "<leader>c", "<cmd>Bdelete!<CR>", desc = "Close Buffer" },
   {
     "<leader>f",
-    function()
-      local builtin = require "telescope.builtin"
-      local themes = require "telescope.themes"
-      builtin.find_files(themes.get_dropdown { previewer = false })
-    end,
+    telescope.find_files,
     desc = "Find files",
   },
   { "<leader>o", "<cmd>SymbolsOutline<cr>", desc = "Outline" },
-  { "<leader>F", "<cmd>Telescope live_grep theme=ivy<cr>", desc = "Find Text" },
+  { "<leader>F", telescope.live_grep, desc = "Find Text" },
   {
     "<leader>P",
     function()
@@ -147,13 +141,6 @@ local mappings = {
   { "<leader>la", vim.lsp.buf.code_action, desc = "Code Action" },
   { "<leader>ld", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document Diagnostics" },
   { "<leader>lw", "<cmd>Telescope diagnostics<cr>", desc = "Workspace Diagnostics" },
-  {
-    "<leader>lf",
-    function()
-      vim.lsp.buf.format { async = true }
-    end,
-    desc = "Format",
-  },
   { "<leader>li", "<cmd>LspInfo<cr>", desc = "Info" },
   { "<leader>lI", "<cmd>Mason<cr>", desc = "Installer Info" },
   {
